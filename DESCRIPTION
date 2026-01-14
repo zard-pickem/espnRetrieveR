@@ -1,0 +1,26 @@
+Package: espnRetrieveR
+Type: Package
+Title: Lean ESPN Sports Data API Client
+Version: 0.1.1
+Author: David [aut, cre]
+Maintainer: David <maintainer@example.com>
+Authors@R: person("David", role = c("aut", "cre"), email = "maintainer@example.com")
+Description: A focused R package for retrieving ESPN sports data as data.table objects.
+    Provides functions to fetch upcoming and completed games, team season statistics,
+    and player season statistics for major sports leagues (NFL, NBA, NHL, MLB).
+    Designed for predictive modeling with minimal dependencies and single-path endpoints.
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.1.0)
+Imports:
+    httr2,
+    jsonlite,
+    data.table,
+    utils,
+    stats,
+    here
+Suggests:
+    testthat (>= 3.0.0),
+    covr

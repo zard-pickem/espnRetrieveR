@@ -1,0 +1,84 @@
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+#' @import data.table
+#' @importFrom httr2 request req_user_agent req_headers req_timeout req_perform resp_status resp_body_json
+#' @importFrom jsonlite fromJSON
+#' @importFrom utils URLencode head
+#' @importFrom stats setNames
+## usethis namespace: end
+NULL
+
+# Silence R CMD check notes about data.table variables
+utils::globalVariables(c(
+  "is_completed", "winprob_home_win_pct", "home_score", "away_score",
+  "winprob_away_win_pct", "date_time_utc", "event_id", "home_team_id",
+  "away_team_id"
+))
+
+#' espnRetrieveR: Lean ESPN Sports Data API Client
+#'
+#' A focused R package for retrieving ESPN sports data as data.table objects.
+#' Provides functions to fetch upcoming and completed games, team season statistics,
+#' and player season statistics for major sports leagues (NFL, NBA, NHL, MLB).
+#' Designed for predictive modeling with minimal dependencies and single-path endpoints.
+#'
+#' @section Main Functions:
+#' \describe{
+#'   \item{\code{\link{get_games_by_date}}}{Get games by date with optional enrichment}
+#'   \item{\code{\link{get_completed_games}}}{Get completed games (scores only)}
+#'   \item{\code{\link{get_team_stats}}}{Get team season statistics}
+#'   \item{\code{\link{get_player_stats}}}{Get player season statistics}
+#'   \item{\code{\link{get_teams}}}{Get teams for a league}
+#'   \item{\code{\link{get_roster}}}{Get roster for a team}
+#' }
+#'
+#' @section Key Features:
+#' \itemize{
+#'   \item Single-path endpoints with no fallbacks or retries
+#'   \item data.table-first output format for efficient data manipulation
+#'   \item Optional enrichment: win probabilities, predictions, odds, starters, injuries
+#'   \item Auxiliary data joins: team statistics and power index
+#'   \item Minimal mode for core data only
+#'   \item Robust error handling that never blocks vital flows
+#' }
+#'
+#' @section Supported Leagues:
+#' \itemize{
+#'   \item NFL (National Football League)
+#'   \item NBA (National Basketball Association)
+#'   \item NHL (National Hockey League)
+#'   \item MLB (Major League Baseball)
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' # Get basic NBA games
+#' games <- get_games_by_date("2025-01-15", "nba")
+#'
+#' # Get NFL games with full enrichment
+#' nfl_games <- get_games_by_date(
+#'   "2025-09-15", "nfl",
+#'   include = c("predictions", "winprob", "odds", "starters"),
+#'   include_team_stats = TRUE
+#' )
+#'
+#' # Get completed games
+#' completed <- get_completed_games("2025-01-14", "nba")
+#'
+#' # Get team statistics
+#' lakers_stats <- get_team_stats("1610612747", 2025, "nba")
+#'
+#' # Get player statistics
+#' lebron_stats <- get_player_stats("1966", 2025, "nba")
+#'
+#' # Get all teams in a league
+#' nba_teams <- get_teams("nba")
+#'
+#' # Get team roster
+#' lakers_roster <- get_roster("1610612747", "nba")
+#' }
+#'
+#' @name espnRetrieveR-package
+NULL
